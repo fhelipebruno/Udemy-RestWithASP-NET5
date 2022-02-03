@@ -13,6 +13,8 @@ namespace Udemy_RestWithASP_NET5.Controllers
             _logger = logger;
         }
 
+        #region GetSum
+
         [HttpGet("sum/{firstNumber}/{secondNumber}")]
         public IActionResult GetSum(string firstNumber, string secondNumber)
         {
@@ -23,6 +25,9 @@ namespace Udemy_RestWithASP_NET5.Controllers
             }
             return BadRequest("Invalid Input");
         }
+        #endregion
+
+        #region GetSubtract
 
         [HttpGet("subtract/{firstNumber}/{secondNumber}")]
         public IActionResult GetSubtract(string firstNumber, string secondNumber)
@@ -35,6 +40,10 @@ namespace Udemy_RestWithASP_NET5.Controllers
             return BadRequest("Invalid Input");
         }
 
+        #endregion
+
+        #region GetMultiply
+
         [HttpGet("multiply/{firstNumber}/{secondNumber}")]
         public IActionResult GetMultiply(string firstNumber, string secondNumber)
         {
@@ -46,6 +55,10 @@ namespace Udemy_RestWithASP_NET5.Controllers
             return BadRequest("Invalid Input");
         }
 
+        #endregion
+
+        #region GetDivision
+
         [HttpGet("division/{firstNumber}/{secondNumber}")]
         public IActionResult GetDivision(string firstNumber, string secondNumber)
         {
@@ -56,6 +69,9 @@ namespace Udemy_RestWithASP_NET5.Controllers
             }
             return BadRequest("Invalid Input");
         }
+        #endregion
+
+        #region GetAverage
 
         [HttpGet("average/{firstNumber}/{secondNumber}")]
         public IActionResult GetAverage(string firstNumber, string secondNumber)
@@ -67,6 +83,9 @@ namespace Udemy_RestWithASP_NET5.Controllers
             }
             return BadRequest("Invalid Input");
         }
+        #endregion
+
+        #region GetSquare
 
         [HttpGet("square/{firstNumber}/{secondNumber}")]
         public IActionResult GetSquare(string firstNumber)
@@ -78,7 +97,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
             }
             return BadRequest("Invalid Input");
         }
-
+        #endregion
 
         private bool IsNumeric(string strNumber)
         {
