@@ -1,12 +1,12 @@
 ﻿using Udemy_RestWithASP_NET5.Model;
 using Udemy_RestWithASP_NET5.Model.Context;
 
-namespace Udemy_RestWithASP_NET5.Services.Implementations {
-    public class PersonServiceImplementation : IPersonService {
+namespace Udemy_RestWithASP_NET5.Repository.Implementations {
+    public class PersonRepositoryImplementation : IPersonRepository {
         
         private MySQLContext _context;
 
-        public PersonServiceImplementation(MySQLContext context) {
+        public PersonRepositoryImplementation(MySQLContext context) {
             _context = context;
         }
 
@@ -33,7 +33,7 @@ namespace Udemy_RestWithASP_NET5.Services.Implementations {
         }
         public Person Update(Person person) {
 
-            if (!Exists(person.Id)) return new Person();
+            if (!Exists(person.Id)) return null;
             
             var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
 
@@ -67,7 +67,7 @@ namespace Udemy_RestWithASP_NET5.Services.Implementations {
             }
         } 
 
-        private bool Exists(long id) {
+        public bool Exists(long id) {
             return _context.Persons.Any(p => p.Id.Equals(id));
         }
     }

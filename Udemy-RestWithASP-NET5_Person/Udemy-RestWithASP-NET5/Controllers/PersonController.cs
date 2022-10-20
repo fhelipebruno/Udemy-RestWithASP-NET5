@@ -1,20 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Udemy_RestWithASP_NET5.Model;
-using Udemy_RestWithASP_NET5.Services;
+using Udemy_RestWithASP_NET5.Business;
 
 namespace Udemy_RestWithASP_NET5.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonController : ControllerBase
     {
 
         private readonly ILogger<PersonController> _logger;
-        private IPersonService _personService;
-        public PersonController(ILogger<PersonController> logger, IPersonService personService)
+        private IPersonBusiness _personBusiness;
+        public PersonController(ILogger<PersonController> logger, IPersonBusiness personBusiness)
         {
             _logger = logger;
-            _personService = personService;
+            _personBusiness = personBusiness;
         }
 
         #region GetFindAll
@@ -22,7 +24,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
         [HttpGet]
         public IActionResult GetFindAll()
         {
-            return Ok(_personService.FindAll());
+            return Ok(_personBusiness.FindAll());
         }
         #endregion
 
@@ -31,7 +33,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
         [HttpGet("{id}")]
         public IActionResult GetFindByID(long id)
         {
-            var person = _personService.FindByID(id);
+            var person = _personBusiness.FindByID(id);
 
             if (person == null)
             {
@@ -53,7 +55,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
                 return BadRequest();
             }
 
-            return Ok(_personService.Create(person));
+            return Ok(_personBusiness.Create(person));
         }
         #endregion
 
@@ -68,7 +70,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
                 return BadRequest();
             }
 
-            return Ok(_personService.Update(person));
+            return Ok(_personBusiness.Update(person));
         }
         #endregion
 
@@ -77,7 +79,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            _personService.Delete(id);
+            _personBusiness.Delete(id);
             return NoContent();
         }
         #endregion
