@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Udemy_RestWithASP_NET5.Model.Base;
 
 namespace Udemy_RestWithASP_NET5.Model {
     
     [Table("Books")]
-    public class Book {
-
-        [Column("id")]
-        public long Id { get; set; }
+    public class Book : BaseEntity{
 
         [Column("author")]
         public string? Author { get; set; }

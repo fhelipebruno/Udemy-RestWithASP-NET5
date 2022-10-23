@@ -5,6 +5,7 @@ using Udemy_RestWithASP_NET5.Business.Implementations;
 using Udemy_RestWithASP_NET5.Repository.Implementations;
 using Udemy_RestWithASP_NET5.Repository;
 using Serilog;
+using Udemy_RestWithASP_NET5.Repository.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +33,7 @@ builder.Services.AddApiVersioning();
 builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 builder.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
 builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-builder.Services.AddScoped<IBookRepository, BookRepositoryImplementation>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 var app = builder.Build();
 
