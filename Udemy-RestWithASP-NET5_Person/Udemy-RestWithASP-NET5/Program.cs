@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Udemy_RestWithASP_NET5.Model.Context;
 using Udemy_RestWithASP_NET5.Business;
 using Udemy_RestWithASP_NET5.Business.Implementations;
-using Udemy_RestWithASP_NET5.Repository.Implementations;
 using Udemy_RestWithASP_NET5.Repository;
 using Serilog;
 using Udemy_RestWithASP_NET5.Repository.Generic;
@@ -31,7 +30,6 @@ builder.Services.AddApiVersioning();
 
 //Dependency Injection
 builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-builder.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
 builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 

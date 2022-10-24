@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Udemy_RestWithASP_NET5.Model.Base;
 
 namespace Udemy_RestWithASP_NET5.Model
 {
     [Table("person")]
-    public class Person
+    public class Person : BaseEntity
     {        
         [Column("id")]
         public long Id { get; set; }
