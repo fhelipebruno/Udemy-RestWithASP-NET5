@@ -5,6 +5,7 @@ using Udemy_RestWithASP_NET5.Business.Implementations;
 using Udemy_RestWithASP_NET5.Repository;
 using Serilog;
 using Udemy_RestWithASP_NET5.Repository.Generic;
+using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,12 @@ builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(connecti
 if (Environment.IsDevelopment()) {
     MigrateDatabase(connection);
 }
+
+builder.Services.AddMvc(options => {
+    options.RespectBrowserAcceptHeader = true;
+    options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml").ToString());
+    options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json").ToString());
+}).AddXmlSerializerFormatters();
 
 builder.Services.AddApiVersioning();
 
