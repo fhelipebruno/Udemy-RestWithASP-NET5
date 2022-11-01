@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Udemy_RestWithASP_NET5.Model;
 using Udemy_RestWithASP_NET5.Business;
+using Udemy_RestWithASP_NET5.Data.VO;
 
 namespace Udemy_RestWithASP_NET5.Controllers {
 
@@ -42,7 +43,7 @@ namespace Udemy_RestWithASP_NET5.Controllers {
         #region Create
 
         [HttpPost]
-        public IActionResult Create([FromBody] Book book) {
+        public IActionResult Create([FromBody] BookVO book) {
 
             if (book == null) {
                 return BadRequest();
@@ -55,7 +56,7 @@ namespace Udemy_RestWithASP_NET5.Controllers {
         #region Put
 
         [HttpPut]
-        public IActionResult Put([FromBody] Book book) {
+        public IActionResult Put([FromBody] BookVO book) {
 
             if (book == null) {
                 return BadRequest();

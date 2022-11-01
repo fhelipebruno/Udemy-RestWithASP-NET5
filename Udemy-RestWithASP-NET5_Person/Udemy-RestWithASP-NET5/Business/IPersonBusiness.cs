@@ -1,12 +1,11 @@
-﻿using Udemy_RestWithASP_NET5.Model;
+﻿using Udemy_RestWithASP_NET5.Data.VO;
 
-namespace Udemy_RestWithASP_NET5.Business
-{
+namespace Udemy_RestWithASP_NET5.Business {
     public interface IPersonBusiness {
-        Person Create(Person person);
-        Person FindByID(long id);
-        List<Person> FindAll();
-        Person Update(Person person);
+        PersonVO Create(PersonVO person);
+        PersonVO FindByID(long id);
+        List<PersonVO> FindAll();
+        PersonVO Update(PersonVO person);
         void Delete(long id);
     }
 }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Udemy_RestWithASP_NET5.Model;
 using Udemy_RestWithASP_NET5.Business;
+using Udemy_RestWithASP_NET5.Data.VO;
 
 namespace Udemy_RestWithASP_NET5.Controllers
 {
@@ -47,7 +48,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
         #region Create
 
         [HttpPost]
-        public IActionResult Create([FromBody] Person person)
+        public IActionResult Create([FromBody] PersonVO person)
         {
 
             if (person == null)
@@ -62,7 +63,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
         #region Put
 
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] PersonVO person)
         {
 
             if (person == null)
