@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Udemy_RestWithASP_NET5.Model;
 using Udemy_RestWithASP_NET5.Business;
 using Udemy_RestWithASP_NET5.Data.VO;
+using Udemy_RestWithASP_NET5.Hypermedia.Filters;
 
 namespace Udemy_RestWithASP_NET5.Controllers
 {
@@ -23,6 +24,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
         #region GetFindAll
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult GetFindAll()
         {
             return Ok(_personBusiness.FindAll());
@@ -32,6 +34,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
         #region GetFindByID
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult GetFindByID(long id)
         {
             var person = _personBusiness.FindByID(id);
@@ -48,6 +51,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
         #region Create
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Create([FromBody] PersonVO person)
         {
 
@@ -63,6 +67,7 @@ namespace Udemy_RestWithASP_NET5.Controllers
         #region Put
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
 

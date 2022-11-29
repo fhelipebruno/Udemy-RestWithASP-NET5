@@ -6,6 +6,8 @@ using Udemy_RestWithASP_NET5.Repository;
 using Serilog;
 using Udemy_RestWithASP_NET5.Repository.Generic;
 using System.Net.Http.Headers;
+using Udemy_RestWithASP_NET5.Hypermedia.Filters;
+using Udemy_RestWithASP_NET5.Hypermedia.Enricher;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +35,12 @@ builder.Services.AddMvc(options => {
     options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json").ToString());
 }).AddXmlSerializerFormatters();
 
+var filterOptions = new HyperMediaFilterOptions();
+filterOptions.ContentResponseEricherList.Add(new PersonEnricher());
+filterOptions.ContentResponseEricherList.Add(new BookEnricher());
+
+builder.Services.AddSingleton(filterOptions);
+
 builder.Services.AddApiVersioning();
 
 //Dependency Injection
@@ -48,6 +56,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
 
 app.Run();
 

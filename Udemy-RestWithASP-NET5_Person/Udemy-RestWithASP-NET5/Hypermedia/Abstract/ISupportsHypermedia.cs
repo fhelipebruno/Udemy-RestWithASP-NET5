@@ -1,5 +1,5 @@
 ﻿namespace Udemy_RestWithASP_NET5.Hypermedia.Abstract {
-    public interface ISupportHypermedia {
+    public interface ISupportsHypermedia {
         List<HyperMediaLink> Links { get; set; }
     }
 }
