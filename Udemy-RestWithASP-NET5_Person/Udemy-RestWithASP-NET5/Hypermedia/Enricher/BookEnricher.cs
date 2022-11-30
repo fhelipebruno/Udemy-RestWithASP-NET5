@@ -7,7 +7,7 @@ namespace Udemy_RestWithASP_NET5.Hypermedia.Enricher {
     public class BookEnricher : ContentResponseEnricher<BookVO> {
         private readonly object _lock = new object();
         protected override Task EnrichModel(BookVO content, IUrlHelper urlHelper) {
-            var path = "api/persons/v1";
+            var path = "api/book";
             string link = getLink(content.Id, urlHelper, path);
 
             content.Links.Add(new HyperMediaLink() {
@@ -38,7 +38,7 @@ namespace Udemy_RestWithASP_NET5.Hypermedia.Enricher {
                 Type = "int"
             });
 
-            return null;
+            return Task.CompletedTask;
         }
 
         private string getLink(long id, IUrlHelper urlHelper, string path) {
