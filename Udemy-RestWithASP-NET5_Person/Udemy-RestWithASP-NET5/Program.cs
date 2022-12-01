@@ -8,6 +8,8 @@ using Udemy_RestWithASP_NET5.Repository.Generic;
 using System.Net.Http.Headers;
 using Udemy_RestWithASP_NET5.Hypermedia.Filters;
 using Udemy_RestWithASP_NET5.Hypermedia.Enricher;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Rewrite;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +45,19 @@ builder.Services.AddSingleton(filterOptions);
 
 builder.Services.AddApiVersioning();
 
+builder.Services.AddSwaggerGen(c => {
+    c.SwaggerDoc("v1",
+        new OpenApiInfo {
+            Title = "REST API's From 0 to Azure with ASP.NET Core 6 and Docker",
+            Version = "v1",
+            Description = "API RESTful devoped in course 'REST API's From 0 to Azure with ASP.NET Core 6 and Docker'",
+            Contact = new OpenApiContact {
+                Name = "Fhelipe Bruno",
+                Url = new Uri("https://github.com/fhelipebruno")
+            }
+        }); 
+});
+
 //Dependency Injection
 builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
@@ -52,6 +67,20 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseSwagger(); 
+
+app.UseSwaggerUI(c => {
+    c.SwaggerEndpoint("/swagger/v1/swagger.json",
+        "REST API's From 0 to Azure with ASP.NET Core 6 and Docker - v1");
+});
+
+var option = new RewriteOptions();
+option.AddRedirect("^$", "swagger");
+
+app.UseRewriter(option);
 
 app.UseAuthorization();
 
