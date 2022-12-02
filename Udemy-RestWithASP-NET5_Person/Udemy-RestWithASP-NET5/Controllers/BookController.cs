@@ -22,6 +22,10 @@ namespace Udemy_RestWithASP_NET5.Controllers {
         #region GetFindAll
 
         [HttpGet]
+        [ProducesResponseType((200), Type = typeof(List<BookVO>))]
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult GetFindAll() {
             return Ok(_bookBusiness.FindAll());
@@ -46,6 +50,9 @@ namespace Udemy_RestWithASP_NET5.Controllers {
         #region Create
 
         [HttpPost]
+        [ProducesResponseType((200), Type = typeof(BookVO))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Create([FromBody] BookVO book) {
 
@@ -60,6 +67,9 @@ namespace Udemy_RestWithASP_NET5.Controllers {
         #region Put
 
         [HttpPut]
+        [ProducesResponseType((200), Type = typeof(BookVO))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] BookVO book) {
 
@@ -74,6 +84,9 @@ namespace Udemy_RestWithASP_NET5.Controllers {
         #region Delete
 
         [HttpDelete("{id}")]
+        [ProducesResponseType((200), Type = typeof(BookVO))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         public IActionResult Delete(long id) {
             _bookBusiness.Delete(id);
             return NoContent();

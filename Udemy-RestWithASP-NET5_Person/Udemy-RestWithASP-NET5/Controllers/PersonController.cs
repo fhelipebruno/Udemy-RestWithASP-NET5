@@ -24,6 +24,10 @@ namespace Udemy_RestWithASP_NET5.Controllers
         #region GetFindAll
 
         [HttpGet]
+        [ProducesResponseType((200), Type = typeof(List<PersonVO>))]
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult GetFindAll()
         {
@@ -34,6 +38,9 @@ namespace Udemy_RestWithASP_NET5.Controllers
         #region GetFindByID
 
         [HttpGet("{id}")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult GetFindByID(long id)
         {
@@ -51,6 +58,9 @@ namespace Udemy_RestWithASP_NET5.Controllers
         #region Create
 
         [HttpPost]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Create([FromBody] PersonVO person)
         {
@@ -67,6 +77,9 @@ namespace Udemy_RestWithASP_NET5.Controllers
         #region Put
 
         [HttpPut]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
@@ -83,6 +96,9 @@ namespace Udemy_RestWithASP_NET5.Controllers
         #region Delete
 
         [HttpDelete("{id}")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
         public IActionResult Delete(long id)
         {
             _personBusiness.Delete(id);

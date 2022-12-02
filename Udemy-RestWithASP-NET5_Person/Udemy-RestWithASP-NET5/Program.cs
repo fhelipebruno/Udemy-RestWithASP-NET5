@@ -20,6 +20,12 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateLogger();
 
+builder.Services.AddCors(options => options.AddDefaultPolicy(builder => {
+    builder.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+}));
+
 // Add services to the container.
 builder.Services.AddControllers();
 
@@ -70,6 +76,8 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseCors();
+
 app.UseSwagger(); 
 
 app.UseSwaggerUI(c => {
@@ -79,14 +87,15 @@ app.UseSwaggerUI(c => {
 
 var option = new RewriteOptions();
 option.AddRedirect("^$", "swagger");
-
 app.UseRewriter(option);
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints => {
+    endpoints.MapControllers();
+    endpoints.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
 
-app.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
+});
 
 app.Run();
 
