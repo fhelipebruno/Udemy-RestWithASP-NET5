@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Udemy_RestWithASP_NET5.Model;
-using Udemy_RestWithASP_NET5.Business;
+ using Udemy_RestWithASP_NET5.Business;
 using Udemy_RestWithASP_NET5.Data.VO;
 using Udemy_RestWithASP_NET5.Hypermedia.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Udemy_RestWithASP_NET5.Controllers {
 
     [ApiVersion("1.0")]
     [ApiController]
+    [Authorize("Bearer")]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class BookController : ControllerBase {
 
