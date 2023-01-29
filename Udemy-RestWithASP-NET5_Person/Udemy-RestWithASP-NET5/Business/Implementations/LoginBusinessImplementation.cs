@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using Udemy_RestWithASP_NET5.Configurations;
 using Udemy_RestWithASP_NET5.Data.Converter.VO;
+using Udemy_RestWithASP_NET5.Model;
 using Udemy_RestWithASP_NET5.Repository;
 using Udemy_RestWithASP_NET5.Services;
 
@@ -32,17 +33,43 @@ namespace Udemy_RestWithASP_NET5.Business.Implementations {
 
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(_configuration.DaystoExpiry);
-            
+
+            return RefreshUserInfo(user, acessToken, refreshToken);
+        }
+
+        public TokenVO ValidateCredentials(TokenVO token)
+        {
+            var acessToken = token.AcessToken;
+            var refreshToken = token.RefreshToken;
+
+            var principal = _tokenService.GetPrincipalFromExpiredToken(acessToken);
+
+            var username = principal.Identity.Name;
+
+            var user = _repository.ValidateCredentials(username);
+
+            if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+                return null;
+
+            acessToken = _tokenService.GenerateAcessToken(principal.Claims);
+            refreshToken = _tokenService.GenerateRefreshToken();
+
+            user.RefreshToken = refreshToken;
+
+            return RefreshUserInfo(user, acessToken, refreshToken);
+        }
+
+        private TokenVO RefreshUserInfo(User user, string acessToken, string refreshToken){
             _repository.RefreshUserInfo(user);
 
             DateTime createDate = DateTime.Now;
             DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes);
-            
+
             return new TokenVO(
-                true, 
-                createDate.ToString(DATE_FORMAT), 
+                true,
+                createDate.ToString(DATE_FORMAT),
                 expirationDate.ToString(DATE_FORMAT),
-                acessToken, 
+                acessToken,
                 refreshToken);
         }
     }

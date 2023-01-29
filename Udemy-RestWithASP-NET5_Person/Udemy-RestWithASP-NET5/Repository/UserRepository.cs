@@ -19,7 +19,12 @@ namespace Udemy_RestWithASP_NET5.Repository {
             return _context.Users.FirstOrDefault(u => u.UserName == user.UserName && (u.Password == pass));
         }
 
-       
+        public User ValidateCredentials(string userName)
+        {
+            return _context.Users.FirstOrDefault(u => u.UserName == userName);
+        }
+
+
 
         public User RefreshUserInfo(User user) {
             if (!_context.Users.Any(u => u.Id.Equals(user.Id))) return null;          
