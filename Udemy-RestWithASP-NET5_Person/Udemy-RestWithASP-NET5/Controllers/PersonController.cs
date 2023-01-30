@@ -92,6 +92,21 @@ namespace Udemy_RestWithASP_NET5.Controllers {
         }
         #endregion
 
+        #region Disable
+
+        [HttpPatch("{id}")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Disable(long id)
+        {
+            var person = _personBusiness.Disable(id);
+
+            return Ok(person);
+        }
+        #endregion
+
         #region Delete
 
         [HttpDelete("{id}")]

@@ -31,6 +31,14 @@ namespace Udemy_RestWithASP_NET5.Hypermedia.Enricher {
                 Type = ResponseTypeFormat.DefaultPut
             });
 
+            content.Links.Add(new HyperMediaLink()
+            {
+                Action = HttpActionVerb.PATCH,
+                Href = link,
+                Rel = RelationType.self,
+                Type = ResponseTypeFormat.DefaultPatch
+            });
+
             content.Links.Add(new HyperMediaLink() {
                 Action = HttpActionVerb.DELETE,
                 Href = link,

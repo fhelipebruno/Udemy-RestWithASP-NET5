@@ -31,7 +31,7 @@ namespace Udemy_RestWithASP_NET5.Repository {
             if (user is null) 
                 return false;
 
-            user.RefreshToken = null;
+            user.RefreshToken = "0";
 
             _context.SaveChanges(); 
 

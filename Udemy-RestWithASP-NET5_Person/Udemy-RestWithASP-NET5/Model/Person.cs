@@ -16,6 +16,7 @@ namespace Udemy_RestWithASP_NET5.Model
         public string Address { get; set; }
         [Column("gender")]
         public string Gender { get; set; }
+        public bool Enabled { get; set; }
 
     }
 
