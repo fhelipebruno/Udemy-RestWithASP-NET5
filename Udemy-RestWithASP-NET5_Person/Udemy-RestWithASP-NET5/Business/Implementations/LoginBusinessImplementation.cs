@@ -59,6 +59,11 @@ namespace Udemy_RestWithASP_NET5.Business.Implementations {
             return RefreshUserInfo(user, acessToken, refreshToken);
         }
 
+        public bool RevokeToken(string userName)
+        {
+            return _repository.RevokeToken(userName);
+        }
+
         private TokenVO RefreshUserInfo(User user, string acessToken, string refreshToken){
             _repository.RefreshUserInfo(user);
 

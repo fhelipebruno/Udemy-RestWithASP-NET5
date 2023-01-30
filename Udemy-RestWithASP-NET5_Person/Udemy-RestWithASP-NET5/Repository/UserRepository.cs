@@ -24,7 +24,19 @@ namespace Udemy_RestWithASP_NET5.Repository {
             return _context.Users.FirstOrDefault(u => u.UserName == userName);
         }
 
+        public bool RevokeToken(string userName)
+        {
+            var user =  _context.Users.FirstOrDefault(u => u.UserName == userName);
+            
+            if (user is null) 
+                return false;
 
+            user.RefreshToken = null;
+
+            _context.SaveChanges(); 
+
+            return true;
+        }
 
         public User RefreshUserInfo(User user) {
             if (!_context.Users.Any(u => u.Id.Equals(user.Id))) return null;          
@@ -49,5 +61,7 @@ namespace Udemy_RestWithASP_NET5.Repository {
             Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
             return BitConverter.ToString(hashedBytes);
         }
+
+       
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Udemy_RestWithASP_NET5.Business;
 using Udemy_RestWithASP_NET5.Data.Converter.VO;
@@ -36,10 +37,24 @@ namespace Udemy_RestWithASP_NET5.Controllers {
             var token = _loginBusiness.ValidateCredentials(tokenVO);
 
             if (token == null)
-            {
                 return BadRequest("Request inválida");
-            }
+
             return Ok(token);
+
+        }
+
+        [HttpGet]
+        [Route("revoke")]
+        [Authorize("Bearer")]
+        public IActionResult Revoke()
+        {
+            var username = User.Identity.Name;
+            var result = _loginBusiness.RevokeToken(username);
+
+            if (!result)
+                return BadRequest("Request inválida");
+
+            return NoContent();
 
         }
     }
