@@ -54,6 +54,25 @@ namespace Udemy_RestWithASP_NET5.Controllers {
         }
         #endregion
 
+        #region GetFindByID
+
+        [HttpGet("{id}")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult GetFindByName([FromQuery] string firtName, string secondName)
+        {
+            var person = _personBusiness.FindByName(firtName, secondName);
+
+            if (person == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(person);
+        }
+
         #region Create
 
         [HttpPost]

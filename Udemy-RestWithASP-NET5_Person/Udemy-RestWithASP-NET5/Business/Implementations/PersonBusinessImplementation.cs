@@ -23,6 +23,10 @@ namespace Udemy_RestWithASP_NET5.Business.Implementations {
         public PersonVO FindByID(long id) {
             return _converter.Parse(_repository.FindByID(id));
         }
+        public List<PersonVO> FindByName(string firstName, string secondName)
+        {
+            return _converter.Parse(_repository.FindByName(firstName, secondName));
+        }
 
         public PersonVO Create(PersonVO person) {
             var personEntity = _converter.Parse(person);
@@ -44,6 +48,6 @@ namespace Udemy_RestWithASP_NET5.Business.Implementations {
         public void Delete(long id) {
             _repository.Delete(id);
         }
-                
+
     }
 }

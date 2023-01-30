@@ -35,7 +35,23 @@ namespace Udemy_RestWithASP_NET5.Repository
             return user;
         }
 
-        
+        public List<Person> FindByName(string firstName, string secondName)
+        {
+            if (!string.IsNullOrWhiteSpace(firstName) && !string.IsNullOrWhiteSpace(secondName))
+            {
+                return _context.Persons.Where(p =>  p.FirstName.Contains(firstName) && 
+                                                    p.LastName.Contains(secondName)).ToList();
+
+            }
+            else if (string.IsNullOrWhiteSpace(firstName) && !string.IsNullOrWhiteSpace(secondName))
+            {
+                return _context.Persons.Where(p => p.LastName.Contains(secondName)).ToList();
+            }
+            else if (!string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(secondName))
+            {
+                return _context.Persons.Where(p => p.FirstName.Contains(firstName)).ToList();
+            }
+            return null;
 
         }
     }
