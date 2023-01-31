@@ -64,7 +64,7 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(builder => {
 }));
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 
 var connection = Configuration["MySQLConnection:MySQLConnectionString"];
 

@@ -54,16 +54,16 @@ namespace Udemy_RestWithASP_NET5.Controllers {
         }
         #endregion
 
-        #region GetFindByID
+        #region GetFindByName
 
-        [HttpGet("{id}")]
+        [HttpGet("FindByName")]
         [ProducesResponseType((200), Type = typeof(PersonVO))]
         [ProducesResponseType((400))]
         [ProducesResponseType((401))]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult GetFindByName([FromQuery] string firtName, string secondName)
+        public IActionResult GetFindByName([FromQuery] string firstName, [FromQuery] string secondName)
         {
-            var person = _personBusiness.FindByName(firtName, secondName);
+            var person = _personBusiness.FindByName(firstName, secondName);
 
             if (person == null)
             {
@@ -72,6 +72,8 @@ namespace Udemy_RestWithASP_NET5.Controllers {
 
             return Ok(person);
         }
+
+        #endregion
 
         #region Create
 
