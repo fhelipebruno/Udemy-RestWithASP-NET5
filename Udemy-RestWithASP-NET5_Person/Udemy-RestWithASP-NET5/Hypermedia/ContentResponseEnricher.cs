@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Routing;
 using System.Collections.Concurrent;
 using Udemy_RestWithASP_NET5.Hypermedia.Abstract;
+using Udemy_RestWithASP_NET5.Hypermedia.Utils;
 
 namespace Udemy_RestWithASP_NET5.Hypermedia {
     public abstract class ContentResponseEnricher<T> : IResponseEnricher where T : ISupportsHypermedia {
@@ -11,7 +12,7 @@ namespace Udemy_RestWithASP_NET5.Hypermedia {
 
         }
         public bool canEnrich(Type contentType) {
-            return contentType == typeof(T) || contentType == typeof(List<T>);
+            return contentType == typeof(T) || contentType == typeof(List<T>) || contentType == typeof(PagedSearchVO<T>);
         }
 
         protected abstract Task EnrichModel(T content, IUrlHelper urlHelper);
@@ -33,6 +34,12 @@ namespace Udemy_RestWithASP_NET5.Hypermedia {
                 else if (okObjectResult.Value is List<T> collection) {
                     ConcurrentBag<T> bag = new ConcurrentBag<T>(collection);
                     Parallel.ForEach(bag, (element) => {
+                        EnrichModel(element, urlHelper);
+                    });
+                }
+                else if (okObjectResult.Value is PagedSearchVO<T> pagedSearch)
+                {
+                    Parallel.ForEach(pagedSearch.List.ToList(), (element) => {
                         EnrichModel(element, urlHelper);
                     });
                 }
