@@ -71,5 +71,25 @@ namespace Udemy_RestWithASP_NET5.Repository.Generic {
 
             return item;
         }
+
+        public List<T> FindWithPagedSearch(string query)
+        {
+            return dataset.FromSqlRaw<T>(query).ToList();
+        }
+
+        public int GetCount(string query)
+        {
+            var result = "";
+            using (var connectcion = _context.Database.GetDbConnection())
+            {
+                connectcion.Open();
+                using (var command = connectcion.CreateCommand())
+                {
+                    command.CommandText = query;
+                    result = command.ExecuteScalar().ToString();
+                }
+            }
+                return int.Parse(result);
+        }
     }
 }
