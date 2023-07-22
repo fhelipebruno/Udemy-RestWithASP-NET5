@@ -28,7 +28,7 @@ namespace Udemy_RestWithASP_NET5.Business.Implementations {
 
             string query = @"select *
                              from person p
-                             where 1 = 1
+                             where 1 = 1 
                             ";
 
             if (!string.IsNullOrWhiteSpace(name))
@@ -38,12 +38,10 @@ namespace Udemy_RestWithASP_NET5.Business.Implementations {
 
             string countQuery = @"select count(1)
                                   from person p
-                                  where 1 = 1";
+                                  where 1 = 1 ";
 
             if (!string.IsNullOrWhiteSpace(name))
                 countQuery += $"and p.first_name like '%{name}%'";
-
-            countQuery += $"order by p.first_name {sort} limit {size} offset {offset}";
 
             var persons = _repository.FindWithPagedSearch(query);
             
