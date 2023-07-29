@@ -18,6 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Udemy_RestWithASP_NET5.Services;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -102,9 +103,13 @@ builder.Services.AddSwaggerGen(c => {
 });
 
 //Dependency Injection
+
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
 builder.Services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
+builder.Services.AddScoped<IFileBusiness, FileBusinessImplementation>();
 
 builder.Services.AddTransient<ITokenService, TokenService>();
 
