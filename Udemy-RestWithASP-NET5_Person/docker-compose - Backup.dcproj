@@ -6,7 +6,7 @@
     <ProjectGuid>31ead9ef-2c8d-42af-b2b7-6808ca53e99c</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
-    <DockerServiceName>udemy-rest-with-asp-net5</DockerServiceName>
+    <DockerServiceName>udemy-restwithasp-net5</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.yml" />
