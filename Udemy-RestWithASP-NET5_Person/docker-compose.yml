@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  udemy-restwithasp-net5:
+    image: ${DOCKER_REGISTRY-}udemyrestwithaspnet5
+    build:
+      context: .
+      dockerfile: Udemy-RestWithASP-NET5/Dockerfile
