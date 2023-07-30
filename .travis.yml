@@ -10,7 +10,7 @@ bedore_install:
 script:
   - docker-compose build
 before_deploy:
-  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --pasword-stdin
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 deploy:
   provider: script
   script:
@@ -19,7 +19,7 @@ deploy:
     docker push $DOCKER_PASSWORD/udemy-rest-with-asp-net5:$TRAVIS_JOB_ID;
     docker push $DOCKER_PASSWORD/udemy-rest-with-asp-net5-db:$TRAVIS_JOB_ID;
   on:
-    branch: master
+    branch: main
 notifications:
   email: false
     
