@@ -4,8 +4,8 @@ language: csharp
 mono: none
 dotnet: 6.0
 services: docker
-bedore_install:
- - cd Udemy-RestWithASP-NET5_Person
+before_install:
+ - cd Udemy-RestWithASP-NET5_Person/Udemy-RestWithASP-NET5_Person
  - echo: "We are in the right folder!"
 script:
   - docker-compose build
