@@ -5,8 +5,8 @@ mono: none
 dotnet: 6.0
 services: docker
 before_install:
- - cd Udemy-RestWithASP-NET5_Person/Udemy-RestWithASP-NET5_Person
- - echo: "We are in the right folder!"
+ - cd Udemy-RestWithASP-NET5_Person
+ - echo "We are in the right folder!"
 script:
   - docker-compose build
 before_deploy:
