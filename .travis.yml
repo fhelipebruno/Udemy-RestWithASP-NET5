@@ -1,0 +1,25 @@
+sudo: required
+dist: bionic
+language: csharp
+mono: none
+dotnet: 6.0
+services: docker
+bedore_install:
+ - cd Udemy-RestWithASP-NET5_Person
+ - echo: "We are in the right folder!"
+script:
+  - docker-compose build
+before_deploy:
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --pasword-stdin
+deploy:
+  provider: script
+  script:
+    docker tag udemy-rest-with-asp-net5-db:$TRAVIS_JOB_ID $DOCKER_PASSWORD/udemy-rest-with-asp-net5-db:$TRAVIS_JOB_ID;
+    docker tag udemy-rest-with-asp-net5:$TRAVIS_JOB_ID $DOCKER_PASSWORD/udemy-rest-with-asp-net5:$TRAVIS_JOB_ID;
+    docker push $DOCKER_PASSWORD/udemy-rest-with-asp-net5:$TRAVIS_JOB_ID;
+    docker push $DOCKER_PASSWORD/udemy-rest-with-asp-net5-db:$TRAVIS_JOB_ID;
+  on:
+    branch: master
+notifications:
+  email: false
+    
