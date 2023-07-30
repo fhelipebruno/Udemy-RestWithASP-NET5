@@ -14,10 +14,10 @@ before_deploy:
 deploy:
   provider: script
   script:
-    docker tag udemy-rest-with-asp-net5-db:$TRAVIS_JOB_ID $DOCKER_PASSWORD/udemy-rest-with-asp-net5-db:$TRAVIS_JOB_ID;
-    docker tag udemy-rest-with-asp-net5:$TRAVIS_JOB_ID $DOCKER_PASSWORD/udemy-rest-with-asp-net5:$TRAVIS_JOB_ID;
-    docker push $DOCKER_PASSWORD/udemy-rest-with-asp-net5:$TRAVIS_JOB_ID;
-    docker push $DOCKER_PASSWORD/udemy-rest-with-asp-net5-db:$TRAVIS_JOB_ID;
+    docker tag udemy-rest-with-asp-net5-db:$TRAVIS_JOB_ID $DOCKER_USERNAME/udemy-rest-with-asp-net5-db:$TRAVIS_JOB_ID;
+    docker tag udemy-rest-with-asp-net5:$TRAVIS_JOB_ID $DOCKER_USERNAME/udemy-rest-with-asp-net5:$TRAVIS_JOB_ID;
+    docker push $DOCKER_USERNAME/udemy-rest-with-asp-net5:$TRAVIS_JOB_ID;
+    docker push $DOCKER_USERNAME/udemy-rest-with-asp-net5-db:$TRAVIS_JOB_ID;
   on:
     branch: main
 notifications:
