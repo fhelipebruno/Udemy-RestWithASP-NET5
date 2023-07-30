@@ -71,9 +71,9 @@ var connection = Configuration["MySQLConnection:MySQLConnectionString"];
 
 builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version())));
 
-if (Environment.IsDevelopment()) {
-    MigrateDatabase(connection);
-}
+//if (Environment.IsDevelopment()) {
+//    MigrateDatabase(connection);
+//}
 
 builder.Services.AddMvc(options => {
     options.RespectBrowserAcceptHeader = true;
