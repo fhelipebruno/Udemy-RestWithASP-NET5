@@ -92,7 +92,7 @@ builder.Services.AddApiVersioning();
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1",
         new OpenApiInfo {
-            Title = "REST API's From 0 to Azure with ASP.NET Core 6 and Docker",
+            Title = "REST API's From 0 to Azure with ASP.NET Core 6 and Docker - Foo Bar",
             Version = "v1",
             Description = "API RESTful devoped in course 'REST API's From 0 to Azure with ASP.NET Core 6 and Docker'",
             Contact = new OpenApiContact {
@@ -147,7 +147,7 @@ app.UseEndpoints(endpoints => {
 
 app.Run();
 
-//Implementação de migrations
+//ImplementaÃ§Ã£o de migrations
 void MigrateDatabase(string connection) {
     try {
         var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connection);
