@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+  db:
+    image: udemy-rest-with-asp-net5-db
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    restart: always
+    build:
+      context: .
+      dockerfile: db/Dockerfile
+    environment:
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      MYSQL_DATABASE: rest_with_asp_net_udemy
+    ports:
+      - 3308:3306
+    networks:
+      - udemy-network
+      
+  udemy-rest-with-asp-net5:
+    image: udemy-rest-with-asp-net5
+    build:
+      context: .
+      dockerfile: Udemy-RestWithASP-NET5/Dockerfile
+    environment:
+      TZ: America/Sao_Paulo
+      ASPNETCORE_ENVIROMENT: Production
+    ports:
+      - 44300:80
+    depends_on:
+      - db
+    networks:
+      - udemy-network
+networks:
+  udemy-network:
+    driver: bridge
+
+      
