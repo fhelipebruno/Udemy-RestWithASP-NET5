@@ -2,14 +2,14 @@
 
 namespace Udemy_RestWithASP_NET5.Model.Context
 {
-    public class MySQLContext : DbContext
+    public class PostgreSQLContext : DbContext
     {
-        public MySQLContext()
+        public PostgreSQLContext()
         {
 
         }
         
-        public MySQLContext(DbContextOptions<MySQLContext> options) : base(options)
+        public PostgreSQLContext(DbContextOptions<PostgreSQLContext> options) : base(options)
         {
 
         }

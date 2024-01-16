@@ -5,11 +5,11 @@ using Udemy_RestWithASP_NET5.Model.Context;
 namespace Udemy_RestWithASP_NET5.Repository.Generic {
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity {
 
-        protected MySQLContext _context;
+        protected PostgreSQLContext _context;
 
         private DbSet<T> dataset;
 
-        public GenericRepository(MySQLContext context) {
+        public GenericRepository(PostgreSQLContext context) {
             _context = context;
             dataset = _context.Set<T>();
         }

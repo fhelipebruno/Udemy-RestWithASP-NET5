@@ -8,7 +8,7 @@ namespace Udemy_RestWithASP_NET5.Repository
     public class PersonRepository : GenericRepository<Person>, IPersonRepository
     {
 
-        public PersonRepository(MySQLContext context) : base(context) { }
+        public PersonRepository(PostgreSQLContext context) : base(context) { }
         public Person Disable(long id)
         {
             if (!_context.Persons.Any(p => p.Id.Equals(id)))

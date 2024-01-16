@@ -67,13 +67,15 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(builder => {
 // Add services to the container.
 builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 
-var connection = Configuration["MySQLConnection:MySQLConnectionString"];
+var connection = Configuration["PostgreSQLConnection:PostgreSQLConnectionString"];
 
-builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version())));
+builder.Services.AddDbContext<PostgreSQLContext>(options => options.UseNpgsql(connection));
 
-//if (Environment.IsDevelopment()) {
-//    MigrateDatabase(connection);
-//}
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+if (Environment.IsDevelopment()) {
+    MigrateDatabase(connection);
+}
 
 builder.Services.AddMvc(options => {
     options.RespectBrowserAcceptHeader = true;
@@ -150,7 +152,7 @@ app.Run();
 //Implementação de migrations
 void MigrateDatabase(string connection) {
     try {
-        var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connection);
+        var evolveConnection = new Npgsql.NpgsqlConnection(connection);
         var evolve = new Evolve.Evolve(evolveConnection, msg => Log.Information(msg)) {
             Locations = new List<string> { "db/migrations", "db/dataset" },
             IsEraseDisabled = true,

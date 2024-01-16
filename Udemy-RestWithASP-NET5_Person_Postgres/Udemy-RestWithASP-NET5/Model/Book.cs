@@ -3,7 +3,7 @@ using Udemy_RestWithASP_NET5.Model.Base;
 
 namespace Udemy_RestWithASP_NET5.Model {
     
-    [Table("Books")]
+    [Table("books")]
     public class Book : BaseEntity{
 
         [Column("author")]

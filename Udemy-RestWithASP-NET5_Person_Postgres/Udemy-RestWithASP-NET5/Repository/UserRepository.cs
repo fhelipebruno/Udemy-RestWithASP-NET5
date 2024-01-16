@@ -8,9 +8,9 @@ using System.Text;
 namespace Udemy_RestWithASP_NET5.Repository {
     public class UserRepository : IUserRepository {
 
-        private readonly MySQLContext _context;
+        private readonly PostgreSQLContext _context;
 
-        public UserRepository(MySQLContext context) {
+        public UserRepository(PostgreSQLContext context) {
             _context = context;
         }
 

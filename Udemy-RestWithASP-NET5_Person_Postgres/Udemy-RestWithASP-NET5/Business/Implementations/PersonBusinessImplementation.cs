@@ -24,7 +24,7 @@ namespace Udemy_RestWithASP_NET5.Business.Implementations {
         {
             var offset = page > 0 ? (page - 1) * pageSize : 0;
             var sort = (!string.IsNullOrWhiteSpace(sortDirection) && !sortDirection.Equals("desc")) ? "asc" : "desc";
-            var size = (pageSize < 1) ? 10 : pageSize;
+            var size = (pageSize < 1) ? 1 : pageSize;
 
             string query = @"select *
                              from person p
