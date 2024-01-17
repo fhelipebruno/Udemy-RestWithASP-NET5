@@ -21,14 +21,15 @@ namespace Udemy_RestWithASP_NET5.Controllers {
 
         #region GetFindAll
 
-        [HttpGet]
+        [HttpGet("{sortDirection}/{PageSize}/{page}")]
         [ProducesResponseType((200), Type = typeof(List<BookVO>))]
         [ProducesResponseType((204))]
         [ProducesResponseType((400))]
         [ProducesResponseType((401))]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult GetFindAll() {
-            return Ok(_bookBusiness.FindAll());
+        public IActionResult Get([FromQuery] string name, string sortDirection, int pageSize, int page)
+        {
+            return Ok(_bookBusiness.FindWithPagedSearch(name, sortDirection, pageSize, page));
         }
         #endregion
 
